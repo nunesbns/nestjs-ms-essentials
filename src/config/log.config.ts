@@ -11,7 +11,7 @@ interface LogConfigInterface {
 export default registerAs('log', (): LogConfigInterface => {
   const configs: ValidationConfig<LogConfigInterface> = {
     levels: {
-      value: JSON.parse(process.env.LOG_LEVELS),
+      value: JSON.parse(process.env.LOG_LEVEL),
       schema: Joi.string().valid('log', 'error', 'warn', 'debug', 'verbose'),
     },
   };
