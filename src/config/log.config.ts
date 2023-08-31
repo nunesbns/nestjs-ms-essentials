@@ -5,16 +5,23 @@ import SchemaValidation, {
 } from 'src/utils/schemaValidation.util';
 
 interface LogConfigInterface {
-  levels: Array<string>;
+  level: Array<string>;
 }
 
 export default registerAs('log', (): LogConfigInterface => {
   const configs: ValidationConfig<LogConfigInterface> = {
-    levels: {
-      value: JSON.parse(process.env.LOG_LEVEL),
-      schema: Joi.string().valid('log', 'error', 'warn', 'debug', 'verbose'),
+    level: {
+      value: process.env.LOG_LEVEL || 'info',
+      schema: Joi.string().valid(
+        'error',
+        'warn',
+        'info',
+        'http',
+        'verbose',
+        'debug',
+        'silly',
+      ),
     },
   };
-
   return SchemaValidation.validate(configs);
 });

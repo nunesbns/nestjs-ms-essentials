@@ -6,13 +6,14 @@ import msConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import kafkaConfig from './config/kafka.config';
 import logConfig from './config/log.config';
+import esConfig from './config/es.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       expandVariables: true,
-      load: [msConfig, databaseConfig, kafkaConfig, logConfig],
+      load: [msConfig, databaseConfig, kafkaConfig, logConfig, esConfig],
     }),
   ],
   controllers: [AppController],
