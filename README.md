@@ -4,13 +4,15 @@ This is a [Nest](https://github.com/nestjs/nest) framework start project for mic
 
 ## What includes
 
-- Schema Validation using `Joi`, you can validate env variable out of the box.
+- Schema Validation using `Joi`.
+- Log directly into Elastic Search
 
 ## Roadmap
 
 I am planning to add following features:
 
 - ~~Enviroment validation~~
+- ~~Logging into Elastic Search~~1
 - Logging Interceptor to log Request/Responses
 - Caching
 - Migrations
