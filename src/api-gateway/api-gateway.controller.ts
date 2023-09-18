@@ -1,12 +1,22 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './api-gateway.service';
+import { Controller, Get, Inject } from '@nestjs/common';
+import { ApiGatewayService } from './api-gateway.service';
+import { ClientProxy } from '@nestjs/microservices';
+import { firstValueFrom } from 'rxjs';
 
 @Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+export class ApiGatewayController {
+  constructor(
+    private readonly agService: ApiGatewayService,
+    @Inject('GATEWAY_SERVICE') private client: ClientProxy,
+  ) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getHealth(): object {
+    return this.agService.getHealth();
+  }
+
+  @Get('/users')
+  async getUsers() {
+    return await firstValueFrom(this.client.send<string>('findAllUsers', ''));
   }
 }

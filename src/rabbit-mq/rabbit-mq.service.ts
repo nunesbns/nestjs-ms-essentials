@@ -6,14 +6,14 @@ import {
   RmqOptions,
   Transport,
 } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class RabbitMqService {
   private client: { [key: string]: ClientProxy } = {};
   constructor(private readonly configService: ConfigService) {}
 
-  private getOptions(queue: string): RmqOptions {
+  public getOptions(queue: string): RmqOptions {
     return {
       transport: Transport.RMQ,
       options: {
@@ -40,17 +40,22 @@ export class RabbitMqService {
     }
   }
 
-  public sendToQueue(
+  public async sendToQueue(pattern: string, queue: string, data: any) {
+    const client = this.getClientForQueue(queue);
+    await client.connect();
+    const response = await firstValueFrom(client.send(pattern, data));
+    client.close();
+    return response;
+  }
+
+  public async emitToQueue(
     pattern: string,
     queue: string,
     data: any,
-  ): Observable<any> {
+  ): Promise<any> {
     const client = this.getClientForQueue(queue);
-    return client.send(pattern, data);
-  }
-
-  public emitToQueue(pattern: string, queue: string, data: any): void {
-    const client = this.getClientForQueue(queue);
+    await client.connect();
     client.emit(pattern, data);
+    client.close();
   }
 }

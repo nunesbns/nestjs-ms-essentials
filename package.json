@@ -30,6 +30,7 @@
     "amqplib": "^0.10.3",
     "joi": "^17.9.2",
     "kafkajs": "^2.2.4",
+    "nats": "^2.16.0",
     "nest-winston": "^1.9.4",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",

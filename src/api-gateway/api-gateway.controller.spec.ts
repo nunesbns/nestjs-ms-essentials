@@ -1,22 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './api-gateway.controller';
-import { AppService } from './api-gateway.service';
+import { ApiGatewayController } from './api-gateway.controller';
+import { ApiGatewayService } from './api-gateway.service';
 
 describe('AppController', () => {
-  let appController: AppController;
+  let appController: ApiGatewayController;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [AppService],
+      controllers: [ApiGatewayController],
+      providers: [ApiGatewayService],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    appController = app.get<ApiGatewayController>(ApiGatewayController);
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return status ok', () => {
+      expect(appController.getHealth()).toBe({ status: 'ok' });
     });
   });
 });

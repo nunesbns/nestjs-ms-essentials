@@ -4,7 +4,6 @@ import { ClientProxy, Transport } from '@nestjs/microservices';
 import { RabbitMqService } from './rabbit-mq.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigService } from '@nestjs/config';
-import { Observable } from 'rxjs';
 
 describe('RabbitMqService', () => {
   let configService: ConfigService;
@@ -64,7 +63,7 @@ describe('RabbitMqService', () => {
 
     const result = rabbitMqService.sendToQueue(pattern, queue, data);
 
-    expect(result).toBeInstanceOf(Observable);
+    expect(result).toBeInstanceOf(Promise);
   });
 
   it('should emit data to the specified queue when emitToQueue is called', () => {
