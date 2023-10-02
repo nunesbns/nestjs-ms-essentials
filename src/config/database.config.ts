@@ -6,6 +6,7 @@ import SchemaValidation, {
 
 interface DatabaseConfigInterface {
   host: string;
+  type: string;
   name: string;
   username: string;
   password: string;
@@ -16,6 +17,10 @@ export default registerAs('database', (): DatabaseConfigInterface => {
   const configs: ValidationConfig<DatabaseConfigInterface> = {
     host: {
       value: process.env.DB_HOST || 'localhost',
+      schema: Joi.string().required(),
+    },
+    type: {
+      value: process.env.DB_TYPE || 'mariadb',
       schema: Joi.string().required(),
     },
     name: {

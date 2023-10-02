@@ -10,6 +10,7 @@ import esConfig from '../config/es.config';
 import { UsersModule } from 'src/users/users.module';
 import natsConfig from 'src/config/nats.config';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
+import { OrmModule } from 'src/orm/orm.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ClientProxyFactory, Transport } from '@nestjs/microservices';
       ],
     }),
     UsersModule,
+    OrmModule,
   ],
   controllers: [ApiGatewayController],
   providers: [

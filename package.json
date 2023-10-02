@@ -20,6 +20,10 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@mikro-orm/core": "^5.8.5",
+    "@mikro-orm/mariadb": "^5.8.5",
+    "@mikro-orm/migrations": "^5.8.5",
+    "@mikro-orm/nestjs": "^5.2.2",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.0.0",
     "@nestjs/core": "^10.0.0",
@@ -38,6 +42,7 @@
     "winston-elasticsearch": "^0.17.2"
   },
   "devDependencies": {
+    "@mikro-orm/cli": "^5.8.5",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.2.4",
@@ -76,5 +81,12 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+      "./src/config/orm.config.ts",
+      "./dist/config/orm.config.js"
+    ]
   }
 }
